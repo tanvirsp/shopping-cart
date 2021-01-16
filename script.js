@@ -1,28 +1,33 @@
+
+
 //Phone Increase
 const phoneIncrease = document.getElementById('phone-increase');
 phoneIncrease.addEventListener('click', function(){
     productHandelar('phone', true);
+   
+
 })
 
 //Phone Decrease
 const phoneDecrease = document.getElementById('phone-decrease');
 phoneDecrease.addEventListener('click', function(){
     productHandelar('phone',false);
+   
 })
-
 
 
 //Case Increase
 const caseIncrease = document.getElementById('case-increase');
 caseIncrease.addEventListener('click', function(){
     productHandelar('case', true)
-   
+    
 })
 
 //Case Decrease
 const caseDecrease = document.getElementById('case-decrease');
 caseDecrease.addEventListener('click', function(){
     productHandelar('case', false);
+    
 })
 
 
@@ -42,14 +47,41 @@ function productHandelar(product, isItIncrease){
     productValue.value = productNewValue;
     let productTotal = 0;
     if(product == 'phone'){
-        productTotal = productNewValue * 1200
+        productTotal = productNewValue * 1000
        
     } if(product == 'case'){
         productTotal = productNewValue * 59;
     }
-    document.getElementById(product + '-price').innerText = productTotal;   
-     
+    document.getElementById(product + '-price').innerText = productTotal; 
+    subTotal ()  
 }
+
+
+// Subtotal 
+function subTotal (){
+    const phoneValue = subUnit('phone');
+    const caseValue = subUnit('case');
+  
+  const subTotal = phoneValue * 1000 + caseValue * 59;
+    document.getElementById('subTotal').innerHTML = subTotal;
+    const totalTaxt = Math.round(subTotal * 0.1);
+    document.getElementById('tax').innerHTML = totalTaxt;
+    const totalPrice = subTotal + totalTaxt;
+    document.getElementById('totalProductPrice').innerHTML = totalPrice;
+
+}
+
+
+function subUnit(product){
+    const productInput = document.getElementById(product + '-value');
+    const productCount = parseInt(productInput.value);
+    return productCount;
+}
+
+
+
+
+
 
 
 
